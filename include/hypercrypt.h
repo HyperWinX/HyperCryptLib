@@ -13,10 +13,18 @@ typedef enum _flags_t{
 } flags_t;
 
 /* Macros to remove magic numbers */
-#define STEPCOUNT 10
-#define BLOCKSIZE 16
-#define ROTATENUM 35
+#define STEPCOUNT   10
+#define BLOCKSIZE   16
+#define ROTATENUM64 35
+#define ROTATENUM16 8
 
 /* Functions definitions */
-errcode_t encrypt(void* buf, uint64_t size, void* key, void** cipher, int flags);
-errcode_t decrypt(void* buf, uint64_t size, void* key, void* target);
+errcode_t encrypt(void* restrict userbuf,
+                  const uint64_t size,
+                  char* restrict key,
+                  void** restrict target,
+                  int flags);
+errcode_t decrypt(void* restrict userbuf,
+                  uint64_t size,
+                  void* restrict key,
+                  void* restrict target);
